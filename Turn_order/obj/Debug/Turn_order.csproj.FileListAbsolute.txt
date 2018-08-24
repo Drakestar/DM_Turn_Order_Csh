@@ -1,0 +1,14 @@
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\bin\Debug\Turn_order.exe.config
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\bin\Debug\Turn_order.exe
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\bin\Debug\Turn_order.pdb
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.csprojResolveAssemblyReference.cache
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Properties.Resources.resources
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.csproj.GenerateResource.Cache
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.csproj.CoreCompileInputs.cache
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.exe
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.pdb
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Encounters.resources
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Players.resources
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.InitiativeLogger.resources
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Form1.resources
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Adder.resources
