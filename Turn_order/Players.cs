@@ -13,22 +13,37 @@ namespace Turn_order
 {
     public partial class Players : Form
     {
+        List<TextBox> players = new List<TextBox>();
+        private int index = -1;
+        private int cur_y = 65;
+
         public Players()
         {
             InitializeComponent();
+            player_factory();
         }
 
-        private void AddPlayer(object sender, EventArgs e)
+        private void player_factory()
         {
-            string temp = textBox1.Text;
-            textBox1.Text = "";
-            label3.Text += temp;
-            label3.Text += Environment.NewLine;
+            index++;
+            players.Add(new TextBox());
+            players[index].Location = new Point(7, cur_y);
+            players[index].Size = new Size(100, 20);
+            players[index].KeyDown += new KeyEventHandler(this.textBox_Enter);
+            this.Controls.Add(players[index]);
+            cur_y += 25;
         }
 
         private void ClearList(object sender, EventArgs e)
         {
-            label3.Text = "";
+            for (int i = index; i >= 1; i--)
+            {
+                this.Controls.Remove(players[i]);
+                players.RemoveAt(i);
+            }
+            index = 0;
+            players[0].Text = "";
+            players[0].Select();
         }
 
         private void SavePlayers(object sender, EventArgs e)
@@ -45,7 +60,10 @@ namespace Turn_order
             if (saveFileDialog1.ShowDialog() == DialogResult.OK){
                 using (StreamWriter sw = new StreamWriter(saveFileDialog1.OpenFile()))
                 {
-                    sw.Write(label3.Text);
+                    for (int i = 0; i <= index; i++)
+                    {
+                        sw.Write(players[i].Text + ",p" + Environment.NewLine);
+                    }
                 }
             }
         }
@@ -54,12 +72,20 @@ namespace Turn_order
         {
             if (e.KeyCode == Keys.Enter)
             {
-                string temp = textBox1.Text;
-                textBox1.Text = "";
-                label3.Text += temp;
-                label3.Text += Environment.NewLine;
+                player_factory();
+                players[index].Select();
             }
             
+        }
+
+        private void Remove_last(object sender, EventArgs e)
+        {
+            if (index != 0)
+            {
+                this.Controls.Remove(players[index]);
+                players.RemoveAt(index);
+                index--;
+            }
         }
     }
 }

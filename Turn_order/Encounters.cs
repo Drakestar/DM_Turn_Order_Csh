@@ -13,9 +13,31 @@ namespace Turn_order
 {
     public partial class Encounters : Form
     {
+        List<TextBox> enemies = new List<TextBox>();
+        List<TextBox> inits = new List<TextBox>();
+        private int index = -1;
+        private int cur_y = 65;
+
         public Encounters()
         {
             InitializeComponent();
+            textbox_factory();
+        }
+
+        private void textbox_factory()
+        {
+            index++;
+            enemies.Add(new TextBox());
+            inits.Add(new TextBox());
+            enemies[index].Location = new Point(7, cur_y);
+            inits[index].Location = new Point(113, cur_y);
+            enemies[index].Size = new Size(100, 20);
+            inits[index].Size = new Size(100, 20);
+            enemies[index].KeyDown += new KeyEventHandler(this.SwitchtoInit);
+            inits[index].KeyDown += new KeyEventHandler(this.InitiativeEnter);
+            this.Controls.Add(enemies[index]);
+            this.Controls.Add(inits[index]);
+            cur_y += 25;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -28,11 +50,26 @@ namespace Turn_order
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ClearClick(object sender, EventArgs e)
+        {
+            for (int i = index; i >= 1; i--)
+            {
+                this.Controls.Remove(enemies[i]);
+                this.Controls.Remove(inits[i]);
+                enemies.RemoveAt(i);
+                inits.RemoveAt(i);
+            }
+            index = 0;
+            enemies[0].Text = "";
+            inits[0].Text = "";
+            enemies[0].Select();
+        }
+
+        private void Save_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.InitialDirectory = @"C:\";
-            saveFileDialog1.Title = "Save Player Names";
+            saveFileDialog1.Title = "Save Encounter";
             saveFileDialog1.CheckPathExists = true;
             saveFileDialog1.DefaultExt = "csv";
             saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
@@ -43,35 +80,42 @@ namespace Turn_order
             {
                 using (StreamWriter sw = new StreamWriter(saveFileDialog1.OpenFile()))
                 {
-                    sw.Write(label3.Text);
+                    Console.WriteLine(index);
+                    for (int i = 0; i <= index; i++)
+                    {
+                        sw.Write(enemies[i].Text + "," + inits[i].Text + "\r\n");
+                    }
                 }
             }
-        }
-
-        private void ClearClick(object sender, EventArgs e)
-        {
-            label3.Text = "";
         }
 
         private void InitiativeEnter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                label3.Text += textBox1.Text;
-                label3.Text += ", ";
-                label3.Text += textBox2.Text;
-                label3.Text += Environment.NewLine;
-                textBox1.Focus();
-                textBox1.Text = "";
-                textBox2.Text = "";
+                textbox_factory();
+                enemies[index].Select();
             }
+            
         }
 
         private void SwitchtoInit(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                textBox2.Focus();
+                inits[index].Select();
+            }
+        }
+
+        private void remove_last(object sender, EventArgs e)
+        {
+            if (index != 0)
+            { 
+                this.Controls.Remove(enemies[index]);
+                this.Controls.Remove(inits[index]);
+                enemies.RemoveAt(index);
+                inits.RemoveAt(index);
+                index--;
             }
         }
     }

@@ -45,12 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Adder.Designer.cs">
-      <DependentUpon>Adder.cs</DependentUpon>
-    </Compile>
     <Compile Include="Encounters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,12 +57,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="InitiativeLogger.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InitiativeLogger.Designer.cs">
-      <DependentUpon>InitiativeLogger.cs</DependentUpon>
-    </Compile>
     <Compile Include="Players.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,17 +65,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Adder.resx">
-      <DependentUpon>Adder.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Encounters.resx">
       <DependentUpon>Encounters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InitiativeLogger.resx">
-      <DependentUpon>InitiativeLogger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Players.resx">
       <DependentUpon>Players.cs</DependentUpon>
