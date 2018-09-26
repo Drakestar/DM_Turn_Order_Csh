@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
@@ -12,6 +10,7 @@ namespace Turn_order
 
     public partial class Form1 : Form
     {
+        // Stats is the basis for most of the ordering and whatnot
         private static List<Stats> fighter_stats = new List<Stats>();
         // Fighters will be derived from the overall list
         private List<Button> fighters = new List<Button>();
@@ -19,15 +18,18 @@ namespace Turn_order
         private List<string> people = new List<string>();
         private List<Label> player_names = new List<Label>();
         private List<TextBox> player_inits = new List<TextBox>();
-
+        // Used for putting the players initiatives into the stats field.
         private List<Label> l_names = new List<Label>();
         private List<Label> l_inits = new List<Label>();
-
+        // There's probably a better way, but 3 different indices anyway
         private int fighter_index = 0;
         private int name_index = 0;
         private int another_index = 0;
         private bool ready_to_play = false;
+        // String for filename
+        private string default_filename = "c:\\";
 
+        // Stats class for initiating, rolled won't start as a number so it stays 0
         private class Stats
         {
             public string name = string.Empty;
@@ -41,6 +43,7 @@ namespace Turn_order
             
         }
 
+        // Factory for creating the labels/textboxes for player initiatives
         private void player_init_maker(string name)
         {
             player_names.Add(new Label());
@@ -55,6 +58,7 @@ namespace Turn_order
             name_index++;
         }
 
+        // Factory for creating the fighter buttons
         public void fighter_maker(string name)
         {
             fighters.Add(new Button());
@@ -83,8 +87,11 @@ namespace Turn_order
             win2.Show();
         }
 
+        // Still called opener, even though it adds to fighter and stats
+        // Not handling a player mid-fight, because there's no goddamn reason to
         private void AddOpener(object sender, EventArgs e)
         {
+            if (add_name.Text == "" || add_init.Text == "") return;
             int tmp;
             int.TryParse(add_init.Text, out tmp);
             Stats newplayer = new Stats(add_name.Text, tmp);
@@ -94,22 +101,31 @@ namespace Turn_order
             add_init.Text = "";
         }
 
-
+        // Removes a fighter from the buttons and fighter_stats
         private void Delete_Fighter(object sender, EventArgs e)
         {
             Button tmp_button = (Button)sender;
             fighter_stats.Remove(fighter_stats.Find(x => x.name == tmp_button.Text));
             this.Controls.Remove((Button)sender);
+            fighters.Remove(tmp_button);
+            int cur_Y = 70;
+            foreach (Button fightyboi in fighters)
+            {
+                fightyboi.Location = new Point(fightyboi.Location.X, cur_Y);
+                cur_Y += 25;
+            }
             fighter_index--;
         }
 
+        // Loads players/monsters into buttons and fighter_stats
         private void Load_Fighters(object sender, EventArgs e)
         {
             string fileName = null;
 
             using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
             {
-                openFileDialog1.InitialDirectory = "c:\\";
+                Console.WriteLine(System.Reflection.Assembly.GetEntryAssembly().Location);
+                openFileDialog1.InitialDirectory = System.Reflection.Assembly.GetEntryAssembly().Location;
                 openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 openFileDialog1.FilterIndex = 2;
                 openFileDialog1.RestoreDirectory = true;
@@ -122,9 +138,8 @@ namespace Turn_order
 
             if (fileName != null)
             {
+                default_filename = fileName;
                 string[] lines = System.IO.File.ReadAllLines(fileName);
-                // Load Stuff from file
-                //Name_label.Text += File.ReadAllText(fileName);
                 foreach (string line in lines)
                 {
                     string[] info = line.Split(',');
@@ -143,20 +158,14 @@ namespace Turn_order
 
         private void Roll_Initiative(object sender, EventArgs e)
         {
-            if (ready_to_play) return;
+            if (ready_to_play || fighters.Count <= 0) return;
             Random r = new Random();
             foreach (Stats contestant in fighter_stats)
             {
                 // Is a player
-                if (people.Contains(contestant.name))
-                {
-                    player_init_maker(contestant.name);
-                }
+                if (people.Contains(contestant.name)) player_init_maker(contestant.name);
                 // Is a monster
-                else
-                {
-                    contestant.rolled = r.Next(0, 20) + contestant.initiative;
-                }
+                else contestant.rolled = r.Next(0, 20) + contestant.initiative;
             }
             // If there are players, which if there aren't what are you even doing?
             if (name_index > 0)
@@ -218,79 +227,21 @@ namespace Turn_order
             }
         }
 
-        private void Turn_Handler(object sender, KeyEventArgs e)
-        {
-            if (ready_to_play)
-            {
-                this.Controls.Remove(l_names[0]);
-                this.Controls.Remove(l_inits[0]);
-                l_names.RemoveAt(0);
-                l_inits.RemoveAt(0);
-                another_index--;
-                if (another_index <= 0) ready_to_play = false;
-            }
-        }
-
+        // Handles pressing the next turn button
         private void Turn_Handler(object sender, EventArgs e)
         {
             if (ready_to_play)
             {
+                // Remove them from visibility and existence then move all other labels up
                 this.Controls.Remove(l_names[0]);
                 this.Controls.Remove(l_inits[0]);
                 l_names.RemoveAt(0);
                 l_inits.RemoveAt(0);
+                foreach (Label x in l_names) x.Location = new Point(x.Location.X, x.Location.Y - 25);
+                foreach (Label x in l_inits) x.Location = new Point(x.Location.X, x.Location.Y - 25);
                 another_index--;
                 if (another_index <= 0) ready_to_play = false;
             }
         }
-
-
-
-        /*private void RollorTurn(object sender, EventArgs e)
-        {
-            if (roll_initiative.Text == "Roll Initiative")
-            {
-                if (!creature_list.Any())
-                {
-                    creature_list.AddRange(new List<string>(Regex.Split(Name_label.Text, Environment.NewLine)));
-                    creature_list.Remove("");
-                }
-                InitiativeLogger win2 = new InitiativeLogger();
-                win2.Show();
-                roll_initiative.Text = "Click to Start";
-            }
-            else if (roll_initiative.Text == "Click to Start")
-            {
-                Name_label.Text = "";
-                SortedList2 = full_list.OrderBy(o => o.Initiative).ToList();
-                SortedList2.Reverse();
-                foreach (var items in SortedList2)
-                {
-                    Name_label.Text += items.Name;
-                    Name_label.Text += Environment.NewLine;
-                    Initative_label.Text += items.Initiative.ToString();
-                    Initative_label.Text += Environment.NewLine;
-                }
-                x = 0;
-                roll_initiative.Text = "Next Turn";
-            }
-            else
-            {
-                Name_label.Text = Name_label.Text.Remove(0, SortedList2[x].Name.Length);
-                Name_label.Text = Name_label.Text.Trim();
-                Initative_label.Text = Initative_label.Text.Remove(0, SortedList2[x].Initiative.ToString().Length);
-                Initative_label.Text = Initative_label.Text.Trim();
-                x++;
-                if (Initative_label.Text == "")
-                {
-                    roll_initiative.Text = "Roll Initiative";
-                    Name_label.Text = "";
-                }
-            }
-        }*/
-
-
-
-
     }
 }
