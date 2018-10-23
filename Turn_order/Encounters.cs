@@ -95,6 +95,7 @@ namespace Turn_order
             {
                 textbox_factory();
                 enemies[index].Select();
+                e.SuppressKeyPress = true;
             }
             
         }
@@ -104,6 +105,7 @@ namespace Turn_order
             if (e.KeyCode == Keys.Enter)
             {
                 inits[index].Select();
+                e.SuppressKeyPress = true;
             }
         }
 

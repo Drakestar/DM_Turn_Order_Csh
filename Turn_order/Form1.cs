@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 
 // ********** TO-DO **********
-// - Add option to just roll initiative once
 // - Add remembering between sessions
 //   * Fighter rememberance
 //   * Checkbox rememberance
@@ -63,7 +62,7 @@ namespace Turn_order
             player_inits.Add(new TextBox());
             player_inits[name_index].Location = new Point(250, 70 + name_index * 25);
             player_inits[name_index].Size = new Size(100, 20);
-            player_inits[name_index].KeyPress += new KeyPressEventHandler(player_init_enter);
+            player_inits[name_index].KeyDown += new KeyEventHandler(player_init_enter);
             this.Controls.Add(player_inits[name_index]);
             name_index++;
         }
@@ -216,7 +215,7 @@ namespace Turn_order
         {
             // If there ain't no players, ain't no one fightin'
             // If they are ready to play, they don't need to roll initiative again
-            if (ready_to_play || fighters.Count <= 0 || l_names.Any()) return;
+            if (ready_to_play || fighters.Count <= 0 || player_inits.Any()) return;
             // Create a random for enemy dice rolls
             Random r = new Random();
             foreach (Stats contestant in fighter_stats)
@@ -239,7 +238,7 @@ namespace Turn_order
                 }
             }
             // If there are players, which if there aren't what are you even doing?
-            // Creates a "finalize" button which rolls from initiative phase to actual combat
+            // Creates a " button which rolls from initiative phase to actual combat
             if (name_index > 0)
             {
                 p_button.Show();
@@ -337,8 +336,9 @@ namespace Turn_order
                 {
                     x.Location = new Point(x.Location.X, x.Location.Y - 25);
                     // Do a check to see if only players are left
-                    if (!people.Contains(x.Text)) only_players = false;
+                    if (RollOnce.Checked && !people.Contains(x.Text)) only_players = false;
                 }
+                if (!RollOnce.Checked) only_players = false;
                 foreach (Label x in l_inits) x.Location = new Point(x.Location.X, x.Location.Y - 25);
 
                 another_index--;
@@ -363,27 +363,30 @@ namespace Turn_order
             }
         }
 
-        private void name_to_init_add_fighter(object sender, KeyPressEventArgs e)
+        private void name_to_init_add_fighter(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 add_init.Select();
+                e.SuppressKeyPress = true;
             }
         }
 
-        private void add_fighter_init_keypress(object sender, KeyPressEventArgs e)
+        private void add_fighter_init_keypress(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 add_name.Select();
                 AddOpener(Add_Fighter_Button, e);
+                e.SuppressKeyPress = true;
             }
         }
 
-        private void player_init_enter(object sender, KeyPressEventArgs e)
+        private void player_init_enter(object sender, KeyEventArgs e)
         {
             TextBox init_box = sender as TextBox;
-            if (e.KeyChar == (char)Keys.Enter)
+            
+            if (e.KeyCode == Keys.Enter)
             {
                 int tmp = player_inits.IndexOf(init_box);
                 // If on the last box "press" the finalize button
@@ -396,15 +399,16 @@ namespace Turn_order
                 {
                     player_inits[tmp + 1].Select();
                 }
+                e.SuppressKeyPress = true;
             }
-
         }
 
-        private void form_enter(object sender, KeyPressEventArgs e)
+        private void form_enter(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 turn_button.PerformClick();
+                e.SuppressKeyPress = true;
             }
         }
 

@@ -74,6 +74,7 @@ namespace Turn_order
             {
                 player_factory();
                 players[index].Select();
+                e.SuppressKeyPress = true;
             }
             
         }

@@ -163,7 +163,7 @@
             this.add_name.Name = "add_name";
             this.add_name.Size = new System.Drawing.Size(100, 20);
             this.add_name.TabIndex = 10;
-            this.add_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.name_to_init_add_fighter);
+            this.add_name.KeyDown += new System.Windows.Forms.KeyEventHandler(this.name_to_init_add_fighter);
             // 
             // add_init
             // 
@@ -171,7 +171,7 @@
             this.add_init.Name = "add_init";
             this.add_init.Size = new System.Drawing.Size(100, 20);
             this.add_init.TabIndex = 11;
-            this.add_init.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.add_fighter_init_keypress);
+            this.add_init.KeyDown += new System.Windows.Forms.KeyEventHandler(this.add_fighter_init_keypress);
             // 
             // Add_Fighter_Button
             // 
@@ -243,7 +243,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.form_enter);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.form_enter);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
