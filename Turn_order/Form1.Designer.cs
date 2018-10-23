@@ -34,20 +34,20 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createEncounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createPlayerListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nukeItToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.totalRestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.label3 = new System.Windows.Forms.Label();
             this.initiative_button = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.turn_button = new System.Windows.Forms.Button();
             this.add_name = new System.Windows.Forms.TextBox();
             this.add_init = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Add_Fighter_Button = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MonsterRoll = new System.Windows.Forms.ToolStripMenuItem();
+            this.RollOnce = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
@@ -76,7 +76,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.loadToolStripMenuItem,
-            this.nukeItToolStripMenuItem,
+            this.optionsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -89,8 +89,7 @@
             this.fileToolStripMenuItem.BackColor = System.Drawing.SystemColors.MenuBar;
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createEncounterToolStripMenuItem,
-            this.createPlayerListToolStripMenuItem,
-            this.clearAllToolStripMenuItem});
+            this.createPlayerListToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -109,12 +108,6 @@
             this.createPlayerListToolStripMenuItem.Text = "Create Player List";
             this.createPlayerListToolStripMenuItem.Click += new System.EventHandler(this.PlayerCreator);
             // 
-            // clearAllToolStripMenuItem
-            // 
-            this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
-            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.clearAllToolStripMenuItem.Text = "Clear All";
-            // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.BackColor = System.Drawing.SystemColors.MenuBar;
@@ -123,25 +116,12 @@
             this.loadToolStripMenuItem.Text = "Load Fighters";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.Load_Fighters);
             // 
-            // nukeItToolStripMenuItem
-            // 
-            this.nukeItToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.totalRestToolStripMenuItem});
-            this.nukeItToolStripMenuItem.Name = "nukeItToolStripMenuItem";
-            this.nukeItToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.nukeItToolStripMenuItem.Text = "NukeIt";
-            // 
-            // totalRestToolStripMenuItem
-            // 
-            this.totalRestToolStripMenuItem.Name = "totalRestToolStripMenuItem";
-            this.totalRestToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.totalRestToolStripMenuItem.Text = "Total Reset";
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.Open_Helpbox);
             // 
             // fileSystemWatcher1
             // 
@@ -167,15 +147,15 @@
             this.initiative_button.UseVisualStyleBackColor = true;
             this.initiative_button.Click += new System.EventHandler(this.Roll_Initiative);
             // 
-            // button2
+            // turn_button
             // 
-            this.button2.Location = new System.Drawing.Point(383, 231);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 51);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Next Turn";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Turn_Handler);
+            this.turn_button.Location = new System.Drawing.Point(383, 231);
+            this.turn_button.Name = "turn_button";
+            this.turn_button.Size = new System.Drawing.Size(106, 51);
+            this.turn_button.TabIndex = 9;
+            this.turn_button.Text = "Next Turn";
+            this.turn_button.UseVisualStyleBackColor = true;
+            this.turn_button.Click += new System.EventHandler(this.Turn_Handler);
             // 
             // add_name
             // 
@@ -183,6 +163,7 @@
             this.add_name.Name = "add_name";
             this.add_name.Size = new System.Drawing.Size(100, 20);
             this.add_name.TabIndex = 10;
+            this.add_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.name_to_init_add_fighter);
             // 
             // add_init
             // 
@@ -190,16 +171,17 @@
             this.add_init.Name = "add_init";
             this.add_init.Size = new System.Drawing.Size(100, 20);
             this.add_init.TabIndex = 11;
+            this.add_init.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.add_fighter_init_keypress);
             // 
-            // button1
+            // Add_Fighter_Button
             // 
-            this.button1.Location = new System.Drawing.Point(383, 127);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Add Fighter";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.AddOpener);
+            this.Add_Fighter_Button.Location = new System.Drawing.Point(383, 127);
+            this.Add_Fighter_Button.Name = "Add_Fighter_Button";
+            this.Add_Fighter_Button.Size = new System.Drawing.Size(75, 23);
+            this.Add_Fighter_Button.TabIndex = 12;
+            this.Add_Fighter_Button.Text = "Add Fighter";
+            this.Add_Fighter_Button.UseVisualStyleBackColor = true;
+            this.Add_Fighter_Button.Click += new System.EventHandler(this.AddOpener);
             // 
             // label4
             // 
@@ -219,6 +201,29 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "Initiative";
             // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MonsterRoll,
+            this.RollOnce});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // MonsterRoll
+            // 
+            this.MonsterRoll.CheckOnClick = true;
+            this.MonsterRoll.Name = "MonsterRoll";
+            this.MonsterRoll.Size = new System.Drawing.Size(180, 22);
+            this.MonsterRoll.Text = "Roll for Monsters";
+            // 
+            // RollOnce
+            // 
+            this.RollOnce.CheckOnClick = true;
+            this.RollOnce.Name = "RollOnce";
+            this.RollOnce.Size = new System.Drawing.Size(180, 22);
+            this.RollOnce.Text = "Roll Once";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,10 +231,10 @@
             this.ClientSize = new System.Drawing.Size(531, 531);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Add_Fighter_Button);
             this.Controls.Add(this.add_init);
             this.Controls.Add(this.add_name);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.turn_button);
             this.Controls.Add(this.initiative_button);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -238,6 +243,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.form_enter);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
@@ -255,19 +261,19 @@
         private System.Windows.Forms.ToolStripMenuItem createEncounterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createPlayerListToolStripMenuItem;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nukeItToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem totalRestToolStripMenuItem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.Button initiative_button;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button turn_button;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Add_Fighter_Button;
         private System.Windows.Forms.TextBox add_init;
         private System.Windows.Forms.TextBox add_name;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MonsterRoll;
+        private System.Windows.Forms.ToolStripMenuItem RollOnce;
     }
 }
 

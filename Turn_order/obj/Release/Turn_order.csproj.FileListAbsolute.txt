@@ -10,3 +10,4 @@ C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.c
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.exe
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.pdb
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.csprojAssemblyReference.cache
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.Helpbox.resources

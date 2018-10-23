@@ -10,3 +10,4 @@ C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Enc
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Players.resources
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Form1.resources
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.csprojAssemblyReference.cache
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Debug\Turn_order.Helpbox.resources
