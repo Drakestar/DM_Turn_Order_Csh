@@ -2,7 +2,6 @@ C:\Users\Northdragon\source\repos\Turn_order\Turn_order\bin\Release\Turn_order.e
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\bin\Release\Turn_order.exe
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\bin\Release\Turn_order.pdb
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.Encounters.resources
-C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.Form1.resources
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.Players.resources
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.Properties.Resources.resources
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.csproj.GenerateResource.Cache
@@ -11,3 +10,4 @@ C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.e
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.pdb
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.csprojAssemblyReference.cache
 C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.Helpbox.resources
+C:\Users\Northdragon\source\repos\Turn_order\Turn_order\obj\Release\Turn_order.MainForm.resources
