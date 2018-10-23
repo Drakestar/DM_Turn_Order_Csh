@@ -8,6 +8,9 @@ using System.Windows.Forms;
 // - Add remembering between sessions
 //   * Fighter rememberance
 //   * Checkbox rememberance
+// - Scroll bar in encounters?
+// - Add color to monsters/players
+// - Able to hide adding fighter
 namespace Turn_order
 {
 
@@ -29,6 +32,8 @@ namespace Turn_order
         private int name_index = 0;
         private int another_index = 0;
         private bool ready_to_play = false;
+        Color friendly = new Color();
+        Color enemy = new Color();
         // String for filename
         private string default_filename = "c:\\";
         Button p_button = new Button();
@@ -74,8 +79,10 @@ namespace Turn_order
             fighters.Add(new Button());
             fighters[fighter_index].Text = name;
             fighters[fighter_index].Location = new Point(7, 70 + fighter_index * 25);
-            fighters[fighter_index].Size = new Size(100, 20);
+            fighters[fighter_index].Size = new Size(100, 25);
             fighters[fighter_index].Click += new EventHandler(Delete_Fighter);
+            if (people.Contains(name)) fighters[fighter_index].BackColor = friendly;
+            else fighters[fighter_index].BackColor = enemy;
             this.Controls.Add(fighters[fighter_index]);
             fighter_index++;
         }
@@ -88,6 +95,9 @@ namespace Turn_order
             p_button.Click += new EventHandler(player_button);
             this.Controls.Add(p_button);
             p_button.Hide();
+            
+            friendly = Color.FromArgb(75, 75, 255);
+            enemy = Color.FromArgb(255, 75, 75);
         }
 
         // For creating groups of players and monsters open the pre-requisite forms and show them
