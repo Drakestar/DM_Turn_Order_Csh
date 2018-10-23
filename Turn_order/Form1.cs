@@ -9,7 +9,6 @@ using System.Windows.Forms;
 //   * Fighter rememberance
 //   * Checkbox rememberance
 // - Scroll bar in encounters?
-// - Add color to monsters/players
 // - Able to hide adding fighter
 namespace Turn_order
 {
@@ -188,8 +187,7 @@ namespace Turn_order
 
             using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
             {
-                Console.WriteLine(System.Reflection.Assembly.GetEntryAssembly().Location);
-                openFileDialog1.InitialDirectory = System.Reflection.Assembly.GetEntryAssembly().Location;
+                openFileDialog1.InitialDirectory = Application.StartupPath;
                 openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 openFileDialog1.FilterIndex = 2;
                 openFileDialog1.RestoreDirectory = true;

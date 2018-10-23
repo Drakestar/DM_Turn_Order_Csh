@@ -49,7 +49,7 @@ namespace Turn_order
         private void SavePlayers(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.InitialDirectory = @"C:\";
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
             saveFileDialog1.Title = "Save Player Names";
             saveFileDialog1.CheckPathExists = true;
             saveFileDialog1.DefaultExt = "csv";
