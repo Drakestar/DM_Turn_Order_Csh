@@ -97,14 +97,14 @@
             // createEncounterToolStripMenuItem
             // 
             this.createEncounterToolStripMenuItem.Name = "createEncounterToolStripMenuItem";
-            this.createEncounterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createEncounterToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.createEncounterToolStripMenuItem.Text = "Create Encounter";
             this.createEncounterToolStripMenuItem.Click += new System.EventHandler(this.open_encounter);
             // 
             // createPlayerListToolStripMenuItem
             // 
             this.createPlayerListToolStripMenuItem.Name = "createPlayerListToolStripMenuItem";
-            this.createPlayerListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createPlayerListToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.createPlayerListToolStripMenuItem.Text = "Create Player List";
             this.createPlayerListToolStripMenuItem.Click += new System.EventHandler(this.PlayerCreator);
             // 
@@ -162,7 +162,7 @@
             // 
             // initiative_button
             // 
-            this.initiative_button.Location = new System.Drawing.Point(350, 192);
+            this.initiative_button.Location = new System.Drawing.Point(338, 181);
             this.initiative_button.Name = "initiative_button";
             this.initiative_button.Size = new System.Drawing.Size(106, 23);
             this.initiative_button.TabIndex = 8;
@@ -172,9 +172,9 @@
             // 
             // turn_button
             // 
-            this.turn_button.Location = new System.Drawing.Point(112, 317);
+            this.turn_button.Location = new System.Drawing.Point(338, 210);
             this.turn_button.Name = "turn_button";
-            this.turn_button.Size = new System.Drawing.Size(255, 62);
+            this.turn_button.Size = new System.Drawing.Size(121, 52);
             this.turn_button.TabIndex = 9;
             this.turn_button.Text = "Next Turn";
             this.turn_button.UseVisualStyleBackColor = true;
@@ -182,7 +182,7 @@
             // 
             // add_name
             // 
-            this.add_name.Location = new System.Drawing.Point(350, 75);
+            this.add_name.Location = new System.Drawing.Point(338, 64);
             this.add_name.Name = "add_name";
             this.add_name.Size = new System.Drawing.Size(100, 20);
             this.add_name.TabIndex = 10;
@@ -190,7 +190,7 @@
             // 
             // add_init
             // 
-            this.add_init.Location = new System.Drawing.Point(350, 125);
+            this.add_init.Location = new System.Drawing.Point(338, 114);
             this.add_init.Name = "add_init";
             this.add_init.Size = new System.Drawing.Size(100, 20);
             this.add_init.TabIndex = 11;
@@ -198,7 +198,7 @@
             // 
             // Add_Fighter_Button
             // 
-            this.Add_Fighter_Button.Location = new System.Drawing.Point(350, 150);
+            this.Add_Fighter_Button.Location = new System.Drawing.Point(338, 139);
             this.Add_Fighter_Button.Name = "Add_Fighter_Button";
             this.Add_Fighter_Button.Size = new System.Drawing.Size(75, 23);
             this.Add_Fighter_Button.TabIndex = 12;
@@ -209,7 +209,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(350, 59);
+            this.label4.Location = new System.Drawing.Point(338, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 13;
@@ -218,13 +218,13 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(350, 109);
+            this.label5.Location = new System.Drawing.Point(338, 98);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 14;
             this.label5.Text = "Initiative";
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -242,7 +242,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormKeyPress);
             this.menuStrip1.ResumeLayout(false);

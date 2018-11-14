@@ -48,7 +48,7 @@ namespace Turn_order
         {
             InitializeComponent();
 
-            p_button.Location = new Point(350, 220);
+            p_button.Location = new Point(338, 265);
             p_button.Text = "Finalize Initiative";
             p_button.Size = new Size(100, 50);
             p_button.Click += new EventHandler(player_button);
