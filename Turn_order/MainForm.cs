@@ -426,6 +426,9 @@ namespace Turn_order
             }
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
